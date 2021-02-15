@@ -1,0 +1,33 @@
+<div class="container">
+    <!-- Fields -->
+    <div class="mb-3">
+        <label for="userName" class="form-label">Username</label>
+        <input type="text" class="form-control" id="userName" placeholder="Shay Dog" [(ngModel)]="userName">
+    </div>
+    <div class="mb-3">
+        <label for="firstName" class="form-label">FirstName</label>
+        <input type="text" class="form-control" id="firstName" placeholder="Moshe" [(ngModel)]="firstName">
+    </div>
+    <div class="mb-3">
+        <label for="lastName" class="form-label">LastName</label>
+        <input type="text" class="form-control" id="lastName" placeholder="Binieli" [(ngModel)]="lastName">
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password">
+    </div>
+    <div class="mb-3">
+        <button *ngIf="signupProgress == true" class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+        </button>
+        <button *ngIf="signupProgress == false" type="button" class="btn btn-outline-primary" (click)="signup()">Sign
+            Up</button>
+        <button type="button" class="btn btn-outline-danger ml-2" (click)="clear()">Clear</button>
+    </div>
+
+    <!-- Error Message -->
+    <div *ngIf="errorMessage == true" class="alert alert-danger" role="alert">
+        Something went wrong, please try again.
+    </div>
+</div>

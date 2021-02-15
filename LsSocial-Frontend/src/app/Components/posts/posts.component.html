@@ -1,0 +1,77 @@
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <!-- Left Side -->
+        <div class="col-md-3">
+            <div *ngIf="dataManagementService.userModel" class="card">
+                <div class="card-body">
+                    <div class="h6">UserName: {{ dataManagementService.userModel?.UserName }}</div>
+                    <div class="h7 text-muted">Fullname: {{ dataManagementService.userModel?.FirstName }} {{
+                        dataManagementService.userModel?.LastName }}</div>
+                    <div class="h7 text-muted">CreatedAt: {{ dataManagementService.userModel?.CreatedAt |
+                        date:'mediumDate' }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle -->
+        <div class="col-md-6 gedf-main">
+
+            <!-- Create Post -->
+            <div class="card gedf-card">
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="name">Name</label>
+                                <input type="text" class="form-control" id="name" placeholder="Name"
+                                    [(ngModel)]="name" />
+                            </div>
+                            <div class="form-group">
+                                <label class="sr-only" for="description">Description</label>
+                                <textarea class="form-control" id="description" rows="3" placeholder="Description"
+                                    [(ngModel)]="description"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-toolbar justify-content-between">
+                        <div class="btn-group">
+                            <button type="submit" class="btn btn-primary" (click)="CreatePost()">share</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- All Posts -->
+            <div *ngFor="let post of posts; let i=index" class="card gedf-card mt-3">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="ml-2">
+                                <div class="h5 m-0">{{ post?.User?.UserName }}</div>
+                                <div class="h7 text-muted">{{ post?.User?.FirstName }} {{ post?.User?.LastName }}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button *ngIf="post.UserID === dataManagementService.userModel.ID" type="button"
+                                class="btn btn-danger btn-sm" (click)="Delete(post, i)">Delete</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{ post.CreatedAt | date:'mediumDate'
+                        }}</div>
+                    <h5 class="card-title">{{ post.Name }}</h5>
+
+                    <p class="card-text">
+                        {{ post.Description }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Right Side -->
+        <div class="col-md-3"></div>
+    </div>
+</div>
